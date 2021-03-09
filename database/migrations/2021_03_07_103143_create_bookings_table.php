@@ -24,7 +24,7 @@ class CreateBookingsTable extends Migration
             $table->string('receiver_email')->nullable();
             $table->string('receiver_mobile');
             $table->string('receiver_address');
-            $table->text('commodity');
+            $table->text('items');
             $table->integer('weight');
             $table->integer('total_weight');
             $table->integer('rate');
