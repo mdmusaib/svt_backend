@@ -9,7 +9,7 @@ class Booking extends Model
     protected $fillable = [
 
     	'customer_type','sender_mobile','sender_origin','receiver_name','receiver_mobile','receiver_address',
-        'items','total_weight','rate','date','total_amount'
+        'items','total_weight','rate','date','total_amount','tax'
 
     ];
 }
