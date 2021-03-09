@@ -29,7 +29,7 @@ class CreateBookingsTable extends Migration
             $table->integer('rate');
             $table->integer('date');
             $table->integer('delivery_date')->nullable();
-            $table->integer('tax');
+            $table->integer('tax')->nullable();
             $table->integer('total_amount');
             $table->dateTime('created_by')->nullable();
             $table->dateTime('updated_by')->nullable();
