@@ -27,8 +27,8 @@ class CreateBookingsTable extends Migration
             $table->text('items');
             $table->integer('total_weight');
             $table->integer('rate');
-            $table->integer('date');
-            $table->integer('delivery_date')->nullable();
+            $table->string('date');
+            $table->string('delivery_date')->nullable();
             $table->integer('tax')->nullable();
             $table->integer('total_amount');
             $table->dateTime('created_by')->nullable();
