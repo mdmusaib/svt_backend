@@ -19,7 +19,7 @@ class VehicleController extends Controller
 
     {
         $data=$request->data;
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($data, [
             'vehicle_no' => 'required',
         ]);
         if($validator->fails()){
