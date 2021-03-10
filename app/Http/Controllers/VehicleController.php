@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse; 
 use Illuminate\Http\Request;
 use App\Booking;
 use App\Vehicle;
@@ -18,7 +19,20 @@ class VehicleController extends Controller
 
     {
         $data=$request->data;
-        
+        $validator = Validator::make($request->all(), [
+            'vehicle_no' => 'required',
+        ]);
+        if($validator->fails()){
+            $message = $validator->errors()->first();
+            $errors=$validator->errors()->first();
+            $code='200';
+            $response = array(
+                'success' => false,
+                'message' => $message,
+                "errors" => $errors
+            );
+            return new JsonResponse($response, $code);
+        }
         // $validator =$request->validate([
         //     'vehicle_no' => 'required',
         // ]);

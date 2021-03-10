@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\JsonResponse; 
 use Illuminate\Http\Request;
 use App\Booking;
 use App\Vehicle;
@@ -17,21 +18,30 @@ class BookingController extends Controller
     public function create(Request $request){
         
         $input = $request->data;
-        
-
-        // $validator = $request->validate([
-        //     'customer_type' => 'required',
-        //     'sender_mobile' => 'required',
-        //     'sender_origin' => 'required',
-        //     'receiver_name' => 'required',
-        //     'receiver_mobile' => 'required',
-        //     'receiver_address' => 'required',
-        //     'items' => 'required',
-        //     'total_weight' => 'required',
-        //     'rate' => 'required',
-        //     'date' => 'required',
-        //     'total_amount' => 'required',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'customer_type' => 'required',
+            'sender_mobile' => 'required',
+            'sender_origin' => 'required',
+            'receiver_name' => 'required',
+            'receiver_mobile' => 'required',
+            'receiver_address' => 'required',
+            'items' => 'required',
+            'total_weight' => 'required',
+            'rate' => 'required',
+            'date' => 'required',
+            'total_amount' => 'required',
+        ]);
+        if($validator->fails()){
+            $message = $validator->errors()->first();
+            $errors=$validator->errors()->first();
+            $code='200';
+            $response = array(
+                'success' => false,
+                'message' => $message,
+                "errors" => $errors
+            );
+            return new JsonResponse($response, $code);
+        }
 
         $booking = Booking::create($input);
         
