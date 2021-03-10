@@ -24,13 +24,12 @@ class CreateBookingsTable extends Migration
             $table->string('receiver_email')->nullable();
             $table->string('receiver_mobile');
             $table->string('receiver_address');
-            $table->text('commodity');
-            $table->integer('weight');
+            $table->text('items');
             $table->integer('total_weight');
             $table->integer('rate');
-            $table->integer('date');
-            $table->integer('delivery_date')->nullable();
-            $table->integer('tax');
+            $table->string('date');
+            $table->string('delivery_date')->nullable();
+            $table->integer('tax')->nullable();
             $table->integer('total_amount');
             $table->dateTime('created_by')->nullable();
             $table->dateTime('updated_by')->nullable();
