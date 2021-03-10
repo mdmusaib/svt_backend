@@ -18,7 +18,7 @@ class BookingController extends Controller
     public function create(Request $request){
         
         $input = $request->data;
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($input, [
             'customer_type' => 'required',
             'sender_mobile' => 'required',
             'sender_origin' => 'required',
