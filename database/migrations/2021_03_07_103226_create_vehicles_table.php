@@ -15,7 +15,7 @@ class CreateVehiclesTable extends Migration
     {
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
-            $table->integer('booking_id');
+            $table->integer('booking_id')->nullable();
             $table->string('vehicle_no');
             $table->string('from_loc')->nullable();
             $table->string('to_loc')->nullable();
