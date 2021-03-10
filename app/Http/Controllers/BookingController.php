@@ -30,6 +30,7 @@ class BookingController extends Controller
             'rate' => 'required',
             'date' => 'required',
             'total_amount' => 'required',
+            'vehicle_details'=>'required'
         ]);
         if($validator->fails()){
             $message = $validator->errors()->first();
