@@ -43,7 +43,10 @@ class BookingController extends Controller
             );
             return new JsonResponse($response, $code);
         }
-
+        
+        $booking = Booking::create($input);
+        
+          if($input['items']!=="[]" && $input['vehicle_details']!=="[]"){
         $booking = Booking::create($input);
         
         if($booking){
@@ -67,8 +70,10 @@ class BookingController extends Controller
             $newVehicle->save();     
             }    
     }
-
     return response()->json(['status'=>1,'response' => $booking]);
+    }else{
+        return response()->json(['status'=>2,'response' => '404!No Information Found In Our Record!']);
+    }
     }
     public function show(Request $request,$id){
         $bookings=Booking::find($id);
