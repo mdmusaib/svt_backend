@@ -18,7 +18,7 @@ class BookingController extends Controller
     public function create(Request $request){
         
         $input = $request->data;
-        $validator = Validator::make($request->all(), [
+        $validator = Validator::make($input, [
             'customer_type' => 'required',
             'sender_mobile' => 'required',
             'sender_origin' => 'required',
@@ -42,7 +42,7 @@ class BookingController extends Controller
             );
             return new JsonResponse($response, $code);
         }
-
+        if($input['items']!=="[]" && $input['vehicle_details']!=="[]"){
         $booking = Booking::create($input);
         
         if($booking){
@@ -52,6 +52,7 @@ class BookingController extends Controller
             $newVehicle->fill([
                 "booking_id"=>$booking->id,
                 "vehicle_no"=>$vehicles->vehicle_no,
+                "dc_no"=>$vehicles->dc_no,
                 "from_loc"=>$vehicles->from_loc,
                 "to_loc"=>$vehicles->to_loc,
                 "material"=>$vehicles->material,
@@ -66,8 +67,10 @@ class BookingController extends Controller
             $newVehicle->save();     
             }    
     }
-
     return response()->json(['status'=>1,'response' => $booking]);
+    }else{
+        return response()->json(['status'=>2,'response' => '404!No Information Found In Our Record!']);
+    }
     }
     public function show(Request $request,$id){
         $bookings=Booking::find($id);
