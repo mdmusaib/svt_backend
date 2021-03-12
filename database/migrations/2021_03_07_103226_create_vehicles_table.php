@@ -17,6 +17,7 @@ class CreateVehiclesTable extends Migration
             $table->id();
             $table->integer('booking_id')->nullable();
             $table->string('vehicle_no');
+            $table->string('dc_no')->nullable();
             $table->string('from_loc')->nullable();
             $table->string('to_loc')->nullable();
             $table->string('material')->nullable();
