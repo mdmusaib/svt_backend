@@ -55,7 +55,7 @@ class BookingController extends Controller
                 $vehicles=Vehicle::where('vehicle_no',$vehicles->vehicle_no)->update([
                         "booking_id"=>$booking->id,
                         "vehicle_no"=>$vehicles->vehicle_no,
-                        "dc_no"=>$vehicles->dc_no,
+
                         "from_loc"=>$vehicles->from_loc,
                         "to_loc"=>$vehicles->to_loc,
                         "material"=>$vehicles->material,
@@ -72,7 +72,7 @@ class BookingController extends Controller
             $newVehicle->fill([
                 "booking_id"=>$booking->id,
                 "vehicle_no"=>$vehicles->vehicle_no,
-                "dc_no"=>$vehicles->dc_no,
+             
                 "from_loc"=>$vehicles->from_loc,
                 "to_loc"=>$vehicles->to_loc,
                 "material"=>$vehicles->material,
