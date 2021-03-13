@@ -19,6 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('getBookings','BookingController@index');
+Route::get('getVehicle','VehicleController@index');
+
 Route::post('addBooking','BookingController@create');
 Route::get('getBooking/{id}','BookingController@show');
 Route::post('updateBooking/{id}','BookingController@update');

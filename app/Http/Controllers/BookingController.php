@@ -47,12 +47,28 @@ class BookingController extends Controller
         $booking = Booking::create($input);
         
           if($input['items']!=="[]" && $input['vehicle_details']!=="[]"){
-        $booking = Booking::create($input);
-        
         if($booking){
             $vehicle_data=json_decode($input['vehicle_details']);
             foreach ($vehicle_data as $vehicles) {
-            $newVehicle=new Vehicle();
+                $vehicles_details=Vehicle::where('vehicle_no',$vehicles->vehicle_no)->first();
+                if($vehicles_details){
+                $vehicles=Vehicle::where('vehicle_no',$vehicles->vehicle_no)->update([
+                        "booking_id"=>$booking->id,
+                        "vehicle_no"=>$vehicles->vehicle_no,
+                        "dc_no"=>$vehicles->dc_no,
+                        "from_loc"=>$vehicles->from_loc,
+                        "to_loc"=>$vehicles->to_loc,
+                        "material"=>$vehicles->material,
+                        "party_name"=>$vehicles->party_name,
+                        "rate"=>$vehicles->rate,
+                        "scale"=>$vehicles->scale,
+                        "total_amount"=>$vehicles->total_amount,
+                        "expences"=>$vehicles->expences,
+                        "driver_name"=>$vehicles->driver_name,
+                        "profit"=>$vehicles->profit
+                ]);
+                }else{
+                    $newVehicle=new Vehicle();
             $newVehicle->fill([
                 "booking_id"=>$booking->id,
                 "vehicle_no"=>$vehicles->vehicle_no,
@@ -69,6 +85,7 @@ class BookingController extends Controller
                 "profit"=>$vehicles->profit
             ]);
             $newVehicle->save();     
+                }
             }    
     }
     return response()->json(['status'=>1,'response' => $booking]);
@@ -94,4 +111,11 @@ class BookingController extends Controller
         return new BookingResource($updateBooking);
 
     }
+
+
+    // public function generateInvoice(Request $request){
+    //     $bookings=Booking::all();
+    //     $invoiceData=BookingResource::collection($bookings);
+    //     return view('index', compact('invoiceData'));
+    // }
 }
